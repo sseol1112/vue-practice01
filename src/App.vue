@@ -1,8 +1,42 @@
 <template>
     <div class="header">
-        <ul>
-            <li v-for="menu in menus" :key="menu"><a href="#">{{menu}}</a></li>
+        <ul class="gnb">
+            <li v-for="menu in menus" :key="menu"><a href="">{{menu}}</a></li>
         </ul>
+        <div class="vmodel_box">
+          <h3>v-model 테스트</h3>
+          <ul>
+            <li>
+              <h4>1. input[type=text]</h4>
+              <div class="text_type_wrap">
+                <input v-model="textInput" placeholder="입력" />
+                <p class="input_result">메세지 : {{ textInput }}</p>
+              </div>
+            </li>
+            <li>
+              <h4>2. input[type=checkbox]</h4>
+              <div class="checkbox_wrap">
+                <input type="checkbox" id="jack" value="Jack" v-model="checkedData">
+                <label for="jack">Jack</label>
+                <input type="checkbox" id="james" value="James" v-model="checkedData">
+                <label for="james">James</label>
+                <input type="checkbox" id="john" value="John" v-model="checkedData">
+                <label for="john">John</label>
+                <p class="input_result">체크한 이름 : {{ checkedData }}</p>
+              </div>
+            </li>
+            <li>
+              <h4>3. input[type=radio]</h4>
+              <div class="radio_wrap">
+                <input type="radio" id="one" value="one" v-model="selectedNumber">
+                <label for="one">One</label>
+                <input type="radio" id="two" value="two" v-model="selectedNumber">
+                <label for="two">Two</label>
+                <p class="input_result">선택 넘버 : {{  selectedNumber }}</p>
+              </div>
+            </li>
+          </ul>
+        </div>
     </div>
     <div class="box_count">
         
@@ -21,7 +55,7 @@
         <!-- <div class="img_wrap">
           <img src="./assets/logo.png" />
         </div> -->
-
+        
     </div> 
 </template>
 
@@ -60,7 +94,10 @@ export default {
         'subject' : 'korean',
         'level' : '2'
       }],
-      menus : ['menu1','menu2','menu3','menu4','menu5']
+      menus : ['menu1','menu2','menu3','menu4','menu5'],
+      textInput:'',
+      checkedData:[],
+      selectedNumber:''
     }
   },
   components: {
@@ -75,7 +112,6 @@ export default {
     },
     minus() {
       let countValue = this.count;
-      //let testA = document.querySelector('.count_num');
       if(countValue == 0 ){
         alert('0 이하로는 내릴 수 없습니다.');
         document.querySelector('.count_num').innerHTML = `<b style='color:#f00;'>${countValue}</b>`;
@@ -84,36 +120,6 @@ export default {
         console.log(this.count);
       }
     },
-    calcFunc(e) {
-      let num1 = parseInt(document.querySelector(".calcul_box .form_box input[name=num1]").value);
-      let num2 = parseInt(document.querySelector(".calcul_box .form_box input[name=num2]").value);
-      let num3 = '';
-      let result = document.querySelector(".result_box h5 .num");
-      let typeVal = e.target.innerText;
-
-    
-      switch(typeVal) {
-        case "+" :          
-          num3 = num1 + num2;
-          result.innerHTML = parseInt(num3);
-          break;
-        case "-" :
-          num3 = num1 - num2;
-          result.innerHTML = parseInt(num3);
-          break;
-        case "*" :
-          num3 = num1 * num2;
-          result.innerHTML = parseInt(num3);
-          break;
-        case "/" :
-          num3 = num1 / num2;
-          result.innerHTML = parseInt(num3);
-          break;
-        default :
-          alert("잘못된 계산식입니다. 내용을 확인해주세요.");
-      }
-      
-    }
 
   }  
 }
@@ -140,7 +146,7 @@ a {text-decoration: 0; color: #2c3e50;}
   margin:0 auto;
 }
 
-.header ul {
+.header .gnb {
   display:flex; justify-content: space-around;
   li {
     background: skyblue; padding:10px 12px;
@@ -151,20 +157,9 @@ a {text-decoration: 0; color: #2c3e50;}
 }
 
 @media screen and (max-width: 383px)  {
-    .header ul li {border:1px solid #000; padding:10px 5px;}
+    .header .gnb li {border:1px solid #000; padding:10px 5px;}
 }
 
-.calcul_box {
-  
-  .form_box {
-    display: flex;  
-    margin-top: 20px;
-    input {
-      width:calc(50% - 10px);
-      margin: 0 5px;
-    }
-  }
-}
 .box_count  {
   button {
   margin: 0 5px;
@@ -176,6 +171,22 @@ a {text-decoration: 0; color: #2c3e50;}
   font-size: 16px;
   cursor: pointer;
   }
+}
+
+.vmodel_box {
+  h3 {
+    border-bottom: 1px dashed #ccc;
+    padding: 10px 0;
+  }
+  ul {
+    li {
+      border-bottom: 1px solid #ccc;
+    }
+  }
+}
+.input_result {
+  font-weight: bold;
+  color: darkcyan;
 }
 
 </style>

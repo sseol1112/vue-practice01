@@ -6,12 +6,20 @@
         <li v-for="itemKey in propItem" :key="itemKey"> 
             <div class="info-area">
                 <span>{{ itemKey.number }}</span>
-                <h3>{{ itemKey.name }}</h3>
-                <p>{{ itemKey.subject }}</p>
-                <h3>{{ itemKey.level }}</h3>
+                <h3 class="name">{{ itemKey.name }}</h3>
+                <p class="subject">{{ itemKey.subject }}</p>
+                <h3 class="level">{{ itemKey.level }}</h3>
+                <input type="radio" value="" name="check"/>
             </div>
         </li>
     </ul>
+    <div class="btn-wrap">
+        <button class="btn" id="submit" @click="submitSelected">제출</button>
+        <button class="btn" id="getter" @click="getSelectedResult">제출한 내용 확인하기</button>
+    </div>
+    <div class="getter-result">
+        <p class="result"></p>
+    </div>
 </template>
 
 <script>
@@ -34,8 +42,43 @@ export default {
     methods : {
         userCheck() {
             let user = document.querySelector('.username');
-            console.log(user);
             user.append(this.userName.name);
+        },
+        submitSelected() {
+            let selectedList = document.querySelector('.info-area input[type=radio]:checked').closest('li');
+            let selectedNum = selectedList.querySelector('span').innerText;
+            let selectedName = selectedList.querySelector('.name').innerText;
+            let selectedSubject = selectedList.querySelector('.subject').innerText;
+            let selectedLevel = selectedList.querySelector('.level').innerText;
+
+
+            if(selectedList === null || selectedList === "" || selectedList === undefined) {
+                alert('선택한 값이 없습니다.');
+            } else {
+                let selectedResult = [selectedNum,selectedName,selectedSubject,selectedLevel];
+                let resultValue = JSON.stringify(selectedResult);
+                
+                console.log(resultValue);
+                localStorage.setItem('selectedResult', resultValue);
+            }
+
+        },
+        getSelectedResult() {
+            let result = document.querySelector('.getter-result .result');
+            let data = JSON.parse(localStorage.getItem('selectedResult'));
+            console.log(data);
+            result.innerHTML = (`<div>
+                                    <ul class="info-list">
+                                        <li v-for="itemKey in propItem" :key="itemKey"> 
+                                            <div class="info-area">
+                                                <span>${data[0]}</span>
+                                                <h3 class="name">${data[1]}</h3>
+                                                <p class="subject">${data[2]}</p>
+                                                <h3 class="level">${data[3]}</h3>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>`);
         }
     },
     mounted() {
@@ -61,5 +104,8 @@ export default {
     }
     .info-area h3 {
         flex-grow: 1;
+    }
+    .btn-wrap {
+        margin:15px 0;
     }
 </style>

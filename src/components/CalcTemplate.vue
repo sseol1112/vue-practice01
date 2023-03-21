@@ -67,10 +67,13 @@ export default {
         resetFunc() {
             let num1El = document.querySelector(".calcul_box .form_box input[name=num1]");
             let num2El = document.querySelector(".calcul_box .form_box input[name=num2]");
+            let result = document.querySelector(".result_box .result");
+        
 
             if(num1El.value.length > 0 || num2El.value.length > 0) {
                 num1El.value = "";
                 num2El.value = "";
+                result.value = ""
                 alert("값 초기화 완료");
             } else {
                 alert("입력한 값이 없습니다.");
