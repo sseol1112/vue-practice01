@@ -59,26 +59,32 @@ export default {
                 let resultValue = JSON.stringify(selectedResult);
                 
                 console.log(resultValue);
-                localStorage.setItem('selectedResult', resultValue);
+                sessionStorage.setItem('selectedResult', resultValue);
+                //localStorage -> sessionStorage로 변경!
+                //localStorage : 브라우저 종료해도 저장값 남아있음 but, sessionStorage는 브라우저를 종료하면 데이터도 삭제됨!
             }
 
         },
         getSelectedResult() {
             let result = document.querySelector('.getter-result .result');
-            let data = JSON.parse(localStorage.getItem('selectedResult'));
+            let data = JSON.parse(sessionStorage.getItem('selectedResult'));
             console.log(data);
-            result.innerHTML = (`<div>
-                                    <ul class="info-list">
-                                        <li v-for="itemKey in propItem" :key="itemKey"> 
-                                            <div class="info-area">
-                                                <span>${data[0]}</span>
-                                                <h3 class="name">${data[1]}</h3>
-                                                <p class="subject">${data[2]}</p>
-                                                <h3 class="level">${data[3]}</h3>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </div>`);
+            if(data != null && data != "") {
+                result.innerHTML = (`<div>
+                                        <ul class="info-list">
+                                            <li v-for="itemKey in propItem" :key="itemKey"> 
+                                                <div class="info-area">
+                                                    <span>${data[0]}</span>
+                                                    <h3 class="name">${data[1]}</h3>
+                                                    <p class="subject">${data[2]}</p>
+                                                    <h3 class="level">${data[3]}</h3>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>`);
+            } else {
+                alert("저장된 데이터가 없습니다.");
+            }
         }
     },
     mounted() {
