@@ -3,6 +3,8 @@
         <ul class="gnb">
             <li v-for="menu in menus" :key="menu"><a href="">{{menu}}</a></li>
         </ul>
+    </div>
+    <div class="box_count">
         <div class="vmodel_box">
           <h3>v-model 테스트</h3>
           <ul>
@@ -23,6 +25,8 @@
                 <input type="checkbox" id="john" value="John" v-model="checkedData">
                 <label for="john">John</label>
                 <p class="input_result">체크한 이름 : {{ checkedData }}</p>
+                <button @click="chkData">체크</button>
+                <strong></strong>
               </div>
             </li>
             <li>
@@ -37,9 +41,6 @@
             </li>
           </ul>
         </div>
-    </div>
-    <div class="box_count">
-        
         <h1><strong>*</strong> count Number 체크!</h1>
         <p class="blind">테스트 웹표준 blind 처리</p>
         <h2 class="count_num">{{ count }}</h2>
@@ -55,8 +56,21 @@
         <!-- <div class="img_wrap">
           <img src="./assets/logo.png" />
         </div> -->
-        
-    </div> 
+        <div class="builtIn_component_wrap">
+          <h3>빌트인 컴포넌트 예제</h3>
+          <ul>
+            <li>
+              <h4>1. transition</h4>
+              <div class="transition_wrap">
+                <button @click="show = !show">토글</button>
+                <Transition>
+                  <p v-if="show">안녕</p>
+                </Transition>
+              </div>
+            </li>
+          </ul>
+        </div>
+    </div>
 </template>
 
 <script>
@@ -97,7 +111,8 @@ export default {
       menus : ['menu1','menu2','menu3','menu4','menu5'],
       textInput:'',
       checkedData:[],
-      selectedNumber:''
+      selectedNumber:'',
+      show: ''
     }
   },
   components: {
@@ -120,6 +135,12 @@ export default {
         console.log(this.count);
       }
     },
+    chkData() {
+      let chkArray = this.checkedData;
+      console.log(chkArray.length);
+      document.querySelector('.checkbox_wrap strong').innerText = chkArray;
+      document.querySelector('.checkbox_wrap strong').style.color = "blue"
+    }
 
   }  
 }
@@ -189,4 +210,16 @@ a {text-decoration: 0; color: #2c3e50;}
   color: darkcyan;
 }
 
+
+.builtIn_component_wrap {
+  .v-enter-active,
+  .v-leave-active {
+    transition: opacity 1s ease;
+  }
+
+  .v-enter-from,
+  .v-leave-to {
+    opacity: 0;
+  }
+}
 </style>
