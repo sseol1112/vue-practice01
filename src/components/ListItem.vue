@@ -17,9 +17,11 @@
         <button class="btn" id="submit" @click="submitSelected">제출</button>
         <button class="btn" id="getter" @click="getSelectedResult">제출한 내용 확인하기</button>
     </div>
-    <div class="getter-result">
-        <p class="result"></p>
-    </div>
+    <Transition>
+        <div class="getter-result">
+            <p class="result"></p>
+        </div>
+    </Transition>
 </template>
 
 <script>
@@ -45,7 +47,7 @@ export default {
             user.append(this.userName.name);
         },
         submitSelected() {
-            let selectedList = document.querySelector('.info-area input[type=radio]:checked').closest('li');
+            let selectedList =document.querySelector('.info-area input[type=radio]:checked').closest('li');
             let selectedNum = selectedList.querySelector('span').innerText;
             let selectedName = selectedList.querySelector('.name').innerText;
             let selectedSubject = selectedList.querySelector('.subject').innerText;

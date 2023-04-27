@@ -50,8 +50,7 @@
         <CalcTemplate ></CalcTemplate>
 
         <!-- component 사용 -->
-        <ListItem :testProp="arrayVue" :user="userInfo"></ListItem>
-
+        <ListItem :testProp="arrayVue" :user="userInfo"></ListItem>        
         <!-- 이미지 -->
         <!-- <div class="img_wrap">
           <img src="./assets/logo.png" />
@@ -70,12 +69,15 @@
             </li>
           </ul>
         </div>
+        <!-- test-component -->
+        <TestComp :member="arrayVue"></TestComp>
     </div>
 </template>
 
 <script>
 import ListItem from './components/ListItem.vue';
 import CalcTemplate from './components/CalcTemplate.vue';
+import TestComp from './components/TestComp.vue';
 
 export default {
   name: 'App',
@@ -117,7 +119,8 @@ export default {
   },
   components: {
     ListItem,
-    CalcTemplate
+    CalcTemplate,
+    TestComp
   },
   methods : {
     plus() {
@@ -137,7 +140,6 @@ export default {
     },
     chkData() {
       let chkArray = this.checkedData;
-      console.log(chkArray.length);
       document.querySelector('.checkbox_wrap strong').innerText = chkArray;
       document.querySelector('.checkbox_wrap strong').style.color = "blue"
     }
