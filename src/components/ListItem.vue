@@ -47,20 +47,18 @@ export default {
             user.append(this.userName.name);
         },
         submitSelected() {
-            let selectedList =document.querySelector('.info-area input[type=radio]:checked').closest('li');
-            let selectedNum = selectedList.querySelector('span').innerText;
-            let selectedName = selectedList.querySelector('.name').innerText;
-            let selectedSubject = selectedList.querySelector('.subject').innerText;
-            let selectedLevel = selectedList.querySelector('.level').innerText;
+            let selectedListChecked = document.querySelector('.info-area input[type=radio]:checked');
 
-
-            if(selectedList === null || selectedList === "" || selectedList === undefined) {
+            if(selectedListChecked === null) {
                 alert('선택한 값이 없습니다.');
             } else {
+                let selectedList =document.querySelector('.info-area input[type=radio]:checked').closest('li');
+                let selectedNum = selectedList.querySelector('span').innerText;
+                let selectedName = selectedList.querySelector('.name').innerText;
+                let selectedSubject = selectedList.querySelector('.subject').innerText;
+                let selectedLevel = selectedList.querySelector('.level').innerText;
                 let selectedResult = [selectedNum,selectedName,selectedSubject,selectedLevel];
                 let resultValue = JSON.stringify(selectedResult);
-                
-                console.log(resultValue);
                 sessionStorage.setItem('selectedResult', resultValue);
                 //localStorage -> sessionStorage로 변경!
                 //localStorage : 브라우저 종료해도 저장값 남아있음 but, sessionStorage는 브라우저를 종료하면 데이터도 삭제됨!
@@ -70,8 +68,8 @@ export default {
         getSelectedResult() {
             let result = document.querySelector('.getter-result .result');
             let data = JSON.parse(sessionStorage.getItem('selectedResult'));
-            console.log(data);
-            if(data != null && data != "") {
+
+            if(data !== null && data !== "") {
                 result.innerHTML = (`<div>
                                         <ul class="info-list">
                                             <li v-for="itemKey in propItem" :key="itemKey"> 

@@ -1,5 +1,6 @@
 !<template>
     <h3>멤버 구성원 정보</h3>
+    
     <ul class="members">
         <button @click="checkMemeber">멤버체크</button>
         <li v-for="i in member" :key="i">

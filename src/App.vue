@@ -26,7 +26,7 @@
                 <label for="john">John</label>
                 <p class="input_result">체크한 이름 : {{ checkedData }}</p>
                 <button @click="chkData">체크</button>
-                <strong></strong>
+                <h5></h5>
               </div>
             </li>
             <li>
@@ -140,8 +140,8 @@ export default {
     },
     chkData() {
       let chkArray = this.checkedData;
-      document.querySelector('.checkbox_wrap strong').innerText = chkArray;
-      document.querySelector('.checkbox_wrap strong').style.color = "blue"
+      document.querySelector('.checkbox_wrap h5').innerText = chkArray;
+      document.querySelector('.checkbox_wrap h5').style.color = "blue"
     }
 
   }  
