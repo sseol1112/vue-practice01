@@ -26,7 +26,7 @@
                 <label for="john">John</label>
                 <p class="input_result">체크한 이름 : {{ checkedData }}</p>
                 <button @click="chkData">체크</button>
-                <strong></strong>
+                <strong class="chked_result"></strong>
               </div>
             </li>
             <li>
@@ -211,7 +211,10 @@ a {text-decoration: 0; color: #2c3e50;}
   font-weight: bold;
   color: darkcyan;
 }
-
+.chked_result {
+  display: block;
+  margin: 10px 0;
+}
 
 .builtIn_component_wrap {
   .v-enter-active,
